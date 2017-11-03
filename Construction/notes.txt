@@ -1,1 +1,39 @@
-LANGUAGE /////////////////////////
+PROCESS ///////////////////////////////////
+- Learn about your projector
+- Figure out how many strings you need
+- Mark where you need the strings to go
+- Suspend the strings
+- Calibrate the projection
+- Run programs
+
+LANGUAGE /////////////////////////////////
+
+Projector
+- Throw distance = projector distance
+- Throw ratio = width of projection : projector distance
+- Aspect ratio = width of projection : height of projection
+
+Lumarca
+- mapline = display width
+- map unit = distance between strings on the x axis from bird’s eye view (mapline / number of strings)
+- depth unit = distance between strings on the y axis from bird’s eye view
+- depth = depth unit * depth levels
+
+DIMENSIONS /////////////////////////////////
+
+1 CHOOSE WIDTH (MAPLINE)
+Only as wide as the width of the foam core (=padding)
+Pick a number that makes marking map units easy. In other words, pick a number that, when divided by the number of strings used, outputs a neat number, such that you can easily measure and mark repeatedly
+
+2 CALCULATE DISPLAY DEPTH
+Only as wide as the width of the foam core
+Based on the number of depth levels determined by the wiremap instructable 
+
+3 CALCULATE DISPLAY HEIGHT
+Equation
+mapline : x = aspect ratio
+
+
+
+
+
