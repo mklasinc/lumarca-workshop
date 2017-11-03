@@ -6,6 +6,13 @@ PROCESS ///////////////////////////////////
 - Calibrate the projection
 - Run programs
 
+
+
+
+
+
+
+
 LANGUAGE /////////////////////////////////
 
 Projector
@@ -18,6 +25,13 @@ Lumarca
 - map unit = distance between strings on the x axis from bird’s eye view (mapline / number of strings)
 - depth unit = distance between strings on the y axis from bird’s eye view
 - depth = depth unit * depth levels
+
+
+
+
+
+
+
 
 DIMENSIONS /////////////////////////////////
 
@@ -32,6 +46,7 @@ Based on the number of depth levels determined by the wiremap instructable
 3 CALCULATE DISPLAY HEIGHT
 Equation
 mapline : x = aspect ratio
+
 
 
 

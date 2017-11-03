@@ -1,0 +1,7 @@
+NUMBERS
+- number of strings: 64
+- display width: 32”
+- width unit: 1/2”
+- depth unit: 1/2”
+- display depth: 20”
+  
