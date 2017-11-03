@@ -1,7 +1,11 @@
 NUMBERS
+
 - number of strings: 64
 - display width: 32”
 - width unit: 1/2”
 - depth unit: 1/2”
+- depth levels: 40
 - display depth: 20”
+- foam core board: 33” * 23.5”
+- display field dimensions: 32” * 20”
   
