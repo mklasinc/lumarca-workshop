@@ -1,6 +1,8 @@
 //  Fullscreen stuff:
 
 import processing.opengl.*;
+import codeanticode.syphon.*;
+SyphonServer server;
 
 static public void main(String args[]) {
   PApplet.main(new String[] { "--present", "calib_64" });
