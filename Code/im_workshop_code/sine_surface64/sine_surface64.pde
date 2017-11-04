@@ -40,6 +40,9 @@ Some conventions to be aware of:
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Write down our own units
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+import codeanticode.syphon.*;
+SyphonServer server;
+
 
 float depth             = 70.0;               // The mapline lies 3 meters away from the projector's focal point
 float map_length        = 32.0;               // The mapline is 1.28 meters wide
@@ -134,6 +137,8 @@ void setup() {
   size(displayWidth, displayHeight, P3D); // opengl rendered in the original file
   background(255);
   loader();
+  server = new SyphonServer(this, "Processing Syphon");
+  string_pix_count = width/64;
 }
 
 void draw() {
@@ -146,6 +151,7 @@ void draw() {
   colorval_g = 0;
   colorval_b = 0;
   sineSurface();
+  server.sendScreen();
 }
 
 void sineSurface() {
