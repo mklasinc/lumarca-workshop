@@ -160,6 +160,7 @@ void setup() {
   keyboard_pos = new PVector(0, 0, 0);
 
   loader();
+  string_pix_count = width/64;
 }
 
 void draw() {

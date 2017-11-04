@@ -109,7 +109,7 @@ void draw() {
   } else {
     fill(0, 0, 255);
   }
-  rect(i * width / wire, 0, 2, height);
+  rect(i * width / wire, 0, width/64, height);
   //rect(i*4, height - 40, 2, 40);
   }
 }
