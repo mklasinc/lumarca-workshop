@@ -1,8 +1,8 @@
 //  Fullscreen stuff:
 
 import processing.opengl.*;
-import codeanticode.syphon.*;
-SyphonServer server;
+//import codeanticode.syphon.*;
+//SyphonServer server;
 
 PGraphics frame;
 
@@ -42,7 +42,7 @@ PGraphics frame;
 // Variables for Physical Wiremap
 // units in INCHES
 
-  float depth = 70.0;                     // distance from projector Mapline
+  float depth = 52.0;                     // distance from projector Mapline
   float map_length = 32.0;                // mapline length
   float depth_unit = 0.5;                   // units, in inches, along hyp
   float map_unit = 0.5;                     // units, in inches, along mapline
@@ -91,36 +91,36 @@ PGraphics frame;
 
 
 void setup() {
-  size(10, 10, P3D);
+  size(displayWidth,displayHeight, P3D);
   frame = createGraphics(displayWidth, displayHeight, P3D);
   background(255);
-  server = new SyphonServer(this, "Calib Syphon");
+  //server = new SyphonServer(this, "Calib Syphon");
 }
 
 void draw() {
-  frame.beginDraw();
-  frame.noStroke();
+  //beginDraw();
+  noStroke();
   if (loaded == false) {
     loader();
     loaded = true;
   }
   globe[0] = (mouseY / float(height)) * (map_length + radius * 2) - (map_length / 2 + radius);
   globe[2] = depth + radius - (width - mouseX) / float(width) * (radius * 2 + 960);
-  frame.fill(0);
-  frame.rect(0,0,width,height);
+  fill(0);
+  rect(0,0,width,height);
   for(int i = 0; i < wire; i ++){
   if(map[i] > depth_levels_third && map[i] < depth_levels_third * 2) {
-    frame.fill(255, 0 ,0);
+    fill(255, 0 ,0);
   } else if(map[i] > (depth_levels_third * 2)) {
-    frame.fill(0,255,0);
+    fill(0,255,0);
   } else {
-    frame.fill(0, 0, 255);
+    fill(0, 0, 255);
   }
-  frame.rect(i * width / wire, 0, width/64, height);
+  rect(i * width / wire, 0, width/64, height);
   //rect(i*4, height - 40, 2, 40);
   }
-  frame.endDraw();
-  server.sendImage(frame);
+  //endDraw();
+  //server.sendImage(frame);
 }
 
 void mousePressed() { 
