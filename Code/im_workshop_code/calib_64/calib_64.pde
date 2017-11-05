@@ -4,9 +4,11 @@ import processing.opengl.*;
 import codeanticode.syphon.*;
 SyphonServer server;
 
-static public void main(String args[]) {
-  PApplet.main(new String[] { "--present", "calib_64" });
-}
+PGraphics frame;
+
+//static public void main(String args[]) {
+//  PApplet.main(new String[] { "--present", "calib_64" });
+//}
 
 
 // Wiremap Renderer for GLOBE
@@ -89,31 +91,36 @@ static public void main(String args[]) {
 
 
 void setup() {
-  size(displayWidth, displayHeight, P3D);
+  size(10, 10, P3D);
+  frame = createGraphics(displayWidth, displayHeight, P3D);
   background(255);
+  server = new SyphonServer(this, "Calib Syphon");
 }
 
 void draw() {
-  noStroke();
+  frame.beginDraw();
+  frame.noStroke();
   if (loaded == false) {
     loader();
     loaded = true;
   }
   globe[0] = (mouseY / float(height)) * (map_length + radius * 2) - (map_length / 2 + radius);
   globe[2] = depth + radius - (width - mouseX) / float(width) * (radius * 2 + 960);
-  fill(0);
-  rect(0,0,width,height);
+  frame.fill(0);
+  frame.rect(0,0,width,height);
   for(int i = 0; i < wire; i ++){
   if(map[i] > depth_levels_third && map[i] < depth_levels_third * 2) {
-    fill(255, 0 ,0);
+    frame.fill(255, 0 ,0);
   } else if(map[i] > (depth_levels_third * 2)) {
-    fill(0,255,0);
+    frame.fill(0,255,0);
   } else {
-    fill(0, 0, 255);
+    frame.fill(0, 0, 255);
   }
-  rect(i * width / wire, 0, width/64, height);
+  frame.rect(i * width / wire, 0, width/64, height);
   //rect(i*4, height - 40, 2, 40);
   }
+  frame.endDraw();
+  server.sendImage(frame);
 }
 
 void mousePressed() { 

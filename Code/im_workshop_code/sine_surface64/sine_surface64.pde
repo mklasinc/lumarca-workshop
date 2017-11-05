@@ -44,11 +44,11 @@ import codeanticode.syphon.*;
 SyphonServer server;
 
 
-float depth             = 70.0;               // The mapline lies 3 meters away from the projector's focal point
+float depth             = 52.0;               // The mapline lies 3 meters away from the projector's focal point
 float map_length        = 32.0;               // The mapline is 1.28 meters wide
 float depth_unit        = 0.5;               // Each depth unit is 5 millimeters
 float map_unit          = 0.5;               // Each mapline unit is 5 millimeters
-int num_of_strings                = 64;                // There are 128 strings in this Wiremap
+int num_of_strings      = 64;                // There are 128 strings in this Wiremap
 float depth_thickness   = 20.0;                 // How deep is the field (perpendicular to the mapline)
 
 
