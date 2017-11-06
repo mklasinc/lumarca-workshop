@@ -136,31 +136,20 @@ float hue_increase = 0.01;
 int old_time_s = 0;
 int new_time_s;
 int color_change_interval = 20;
-int[][] globe_color_array = { {0,100,100}, {0,0,100}};
-int[][] bottom_color_array = { {0,0,100}, {0,100,100} };
+int[][] globe_hue_array = { {0,100,100}, {0,0,100},{300,100,100}  };
+int[][] bottom_hue_array = { {0,0,100}, {0,100,100} };
 int hue_array_counter = 0;
 boolean hue_change_underway = false;
-float hue_change_limit = 1.0;
-//GLOBE VARIABLES
-int globe_init_h;
-int globe_init_s;
-int globe_init_b;
-int globe_end_h;
-int globe_end_s;
-int globe_end_b;
-float globe_running_h;
-float globe_running_b;
-float globe_running_s;
-//BOTTOM VARIABLES
-int bottom_init_h;
-int bottom_init_s;
-int bottom_init_b;
-int bottom_end_h;
-int bottom_end_s;
-int bottom_end_b;
-float bottom_running_h;
-float bottom_running_b;
-float bottom_running_s;
+float hue_change_limit = 3.0;
+int init_h;
+int init_s;
+int init_b;
+int end_h;
+int end_s;
+int end_b;
+float running_h;
+float running_b;
+float running_s;
 float hue_change_val = 0.0;
 int hue_change_rate;
 int next_color_counter;
@@ -170,7 +159,7 @@ int prev_color_counter;
 import processing.opengl.*;
 
 static public void main(String args[]) {
-  PApplet.main(new String[] { "--present", "sine_color_change" });
+  PApplet.main(new String[] { "--present", "sine_surface_color" });
 }
 
 void setup() {
@@ -182,8 +171,8 @@ void setup() {
   colorMode(HSB,360,100,100);
   white = color(0,0,100);
   bottom_color = color(0,0,0);
-  //globe_color = color(0,100,100);
-  //globe_color = color(155,100,100);
+  globe_color = color(0,100,100);
+  globe_color = color(155,100,100);
   //bottom_color = color(205,100,100);
   
 }
@@ -202,7 +191,7 @@ void draw() {
   //server.sendScreen();
   color_change();
   //println(hue_change_val);
-  //println(globe_color_array[0][0]);
+  //println(globe_hue_array[0][0]);
 }
 
 void color_change(){
@@ -214,13 +203,13 @@ void color_change(){
     //println(new_time_s);
     hue_array_counter++;
     
-    if(hue_array_counter == globe_color_array.length){
+    if(hue_array_counter == globe_hue_array.length){
       hue_array_counter = 0;
     }
     //CHANGE COLOR
     hue_change_underway = true;
     
-    //println(globe_color_array[hue_array_counter]);
+    //println(globe_hue_array[hue_array_counter]);
     old_time_s = new_time_s;
   }
   
@@ -232,40 +221,21 @@ void color_change(){
      if(hue_array_counter - 1 >= 0){
        prev_color_counter = hue_array_counter - 1;
      }else{
-       prev_color_counter = globe_color_array.length - 1;
+       prev_color_counter = globe_hue_array.length - 1;
      }
      next_color_counter = hue_array_counter;
      println("next color counter is: " + next_color_counter);
      println("prev color counter is: " + prev_color_counter);
      
-     
-    globe_init_h = globe_color_array[prev_color_counter][0];
-    globe_end_h = globe_color_array[next_color_counter][0];
-    globe_init_s = globe_color_array[prev_color_counter][1];
-    globe_end_s = globe_color_array[next_color_counter][1];
-    globe_end_b = globe_color_array[prev_color_counter][2];
-    globe_end_b = globe_color_array[next_color_counter][2];
-     globe_running_h = map(hue_change_val, 0,hue_change_limit, globe_init_h,globe_end_h);
-     globe_running_s = map(hue_change_val, 0,hue_change_limit, globe_init_s,globe_end_s);
-     globe_running_b = map(hue_change_val, 0,hue_change_limit, globe_init_b,globe_end_b);
-     
-     
-     
-     bottom_init_h = bottom_color_array[prev_color_counter][0];
-     bottom_end_h = bottom_color_array[prev_color_counter][0];
-    bottom_init_s = bottom_color_array[prev_color_counter][1];
-     bottom_end_s = bottom_color_array[prev_color_counter][1];
-    bottom_init_b = bottom_color_array[prev_color_counter][2];
-     bottom_end_b = bottom_color_array[prev_color_counter][2];
-     bottom_running_h = map(hue_change_val, 0,hue_change_limit, bottom_init_h,bottom_end_h);
-     bottom_running_s = map(hue_change_val, 0,hue_change_limit, bottom_init_s,bottom_end_s);
-     bottom_running_b = map(hue_change_val, 0,hue_change_limit, bottom_init_b,bottom_end_b);
-     //println("running h is: " + globe_running_h);
+     init_h = globe_hue_array[prev_color_counter][0];
+     end_h = globe_hue_array[next_color_counter][0];
+     //println("init h is: " + init_h);
+     //println("init h is: " + init_h);
+     running_h = map(hue_change_val, 0,hue_change_limit, init_h,end_h);
+     //println("running h is: " + running_h);
      //increase hue_change_val
      hue_change_val += hue_increase;
-     
-     globe_color = color(globe_running_h, globe_running_s,globe_running_b);
-     bottom_color = color(bottom_running_h, bottom_running_s,bottom_running_b);
+     globe_color = color(running_h, 100,100);
      // STOP THE COLOR CHANGE
      if(hue_change_val > hue_change_limit){
        hue_change_val = 0;
@@ -348,7 +318,7 @@ void sineSurface() {
 
     // rect 3 is filler for sliver
     fill(bottom_color); // BOTTOM STRIPS 
-    //fill(0,100,100);
+    //fill(white);
     float left3 = i * (width) / num_of_strings;
     float top3 = (height/ppi - y_top_proj) * ppi + dot_height;
     float wide3 = string_pix_count;
@@ -418,8 +388,7 @@ void gen_globe(float x, float y, float z, float rad) {
 
         /* Top dot
         ---------------------------------------------------------*/
-        fill(globe_color);
-        //fill(0,0,0);// Fill the globe pixels this color
+        fill(globe_color);                                   // Fill the globe pixels this color
         float left1           = i * (width) / num_of_strings;
         float top1            = (height/ppi - y_top_proj) * ppi + dot_height;     // ppi = pixel / mm.  These are conversions to & from pixels and mm
         float wide1           = string_pix_count;
